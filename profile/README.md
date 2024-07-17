@@ -1,7 +1,5 @@
 # Introduction
 
-Here's a concise summary of UPLION's purpose and function in English:
-
 UPLION (Unified Platform for Leveraging Intelligent Operations in AI Networks) is designed to revolutionize AI model deployment and management. Its key features include:
 
 1. Unified platform for comprehensive AI operations
