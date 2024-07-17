@@ -89,3 +89,7 @@ Destroy the resources to avoid unnecessary charges.
 ```bash
 terraform destroy -auto-approve
 ```
+
+# Document
+
+For more detailed project introduction and usage instructions, you can read our [project document](../Document.md)
