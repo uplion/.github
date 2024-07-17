@@ -2,7 +2,7 @@
 
 # Architecture
 
-![Untitled](Document%200a4fe0caa89449ca86406174c46aca84/Untitled.png)
+![Architecture](Architecture.png)
 
 # Introduction
 
