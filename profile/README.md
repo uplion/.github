@@ -9,4 +9,4 @@ UPLION's architecture centers on a main API service, message queue, worker nodes
 
 [Installation](https://github.com/uplion/infra-config?tab=readme-ov-file#how-to-use)
 
-[Document](../Document.md)
+[Documentation](../Documentation.md)
