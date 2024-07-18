@@ -7,6 +7,6 @@ UPLION is designed to revolutionize AI model deployment and management. Its key 
 
 UPLION's architecture centers on a main API service, message queue, worker nodes, and an AI model operator. This design ensures high concurrency and low latency in AI task processing. By leveraging cloud technologies and Kubernetes, UPLION aims to provide a scalable, efficient, and future-ready infrastructure for AI systems.
 
-[Installation](https://github.com/uplion/infra-config?tab=readme-ov-file#how-to-use).
+[Installation](https://github.com/uplion/infra-config?tab=readme-ov-file#how-to-use)
 
 [Document](../Document.md)
