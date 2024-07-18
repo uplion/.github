@@ -1,10 +1,10 @@
 # Documentation
 
-# Architecture
+## Architecture
 
 ![Architecture](Architecture.png)
 
-# Introduction
+## Introduction
 
 In the rapidly evolving landscape of AI services, we have all witnessed the growing pains of scaling and reliability. Remember last year's frustrations when popular AI services like **ChatGPT** faced frequent downtimes? These instances highlighted a critical question: How can we build more resilient AI infrastructures? Today, we are excited to introduce **uplion**—an experimental project exploring innovative solutions to this challenge.
 
@@ -28,7 +28,7 @@ So, what exactly is **UPLION**?
 
 This experimental project aims to revolutionize how we build and manage AI infrastructures, offering a glimpse into the future of resilient, scalable, and efficient AI systems.
 
-## Unified AI Platform
+### Unified AI Platform
 
 At its core, UPLION aims to provide AI API services with the flexibility to deploy any model, **whether local or remote.** This versatility ensures that organizations can seamlessly integrate their finely-tuned models or utilize external AI capabilities.
 
@@ -36,7 +36,7 @@ Moreover, managing these integrations is straightforward. UPLION's design not on
 
 Let's consider the practical applications of UPLION. Imagine an institution that wants to offer customized AI services to its members. With UPLION, this institution can deploy its tailored models to meet the unique needs of its members. This is particularly beneficial for AI startups. These emerging companies can deploy and manage their innovative models, test new ideas, and scale their operations efficiently within the UPLION ecosystem.
 
-## Leveraging Cloud-Native Design
+### Leveraging Cloud-Native Design
 
 Let us examine the cloud-native design principles underpinning UPLION and explore its architectural components in detail.
 
@@ -54,34 +54,34 @@ This configuration forms the core architecture of UPLION. Additionally, several 
 
 For primary storage, we employ a **PostgreSQL** database cluster due to its robustness and reliability. Only the management dashboard and billing services need to write to the main database; other services require read access and thus connect to read replicas, utilizing a **Redis** cluster for caching. This setup enhances performance by providing rapid data access and reducing load on the database. It is important to note that throughout the entire API request process, there is no need to write to the database, ensuring that request concurrency and latency remain unaffected. For message queuing, we use **Pulsar**, chosen for its excellent scalability and capacity to handle high-throughput, low-latency messaging.
 
-## Intelligent Self-Serving Task Distribution
+### Intelligent Self-Serving Task Distribution
 
 Traditional designs often employ a central master node to allocate tasks to worker nodes. However, in UPLION, such a design is considered overly complex and difficult to maintain. Instead, the components are decoupled using a message queue. Worker nodes autonomously manage their own states. When a worker node determines it can handle an additional task, it retrieves a new task from the message queue under the topic corresponding to its designated model.
 
 This architecture eliminates the need for a central coordinator. If the operator creates multiple instances of the same worker node, no additional adjustments are required. The message queue efficiently handles such scaling dynamics. This design inherently supports automatic scaling, making the system highly adaptable and efficient in managing resource distribution without the traditional overhead associated with task assignment.
 
-## Optimizing Resource Allocation
+### Optimizing Resource Allocation
 
 A key attribute of UPLION is its capability for automatic scalability. This is facilitated through the use of KEDA (Kubernetes Event-Driven Autoscaling). When an AI model is instantiated, the operator automatically generates a KEDA ScaledObject, which in turn leads to the creation of a Horizontal Pod Autoscaler (HPA) by KEDA. The HPA continuously monitors the message queue, and if the number of unprocessed messages surpasses a predefined threshold, KEDA triggers the creation of additional pods to manage the increased workload. Conversely, if the number of unprocessed messages falls below the threshold, the number of pods is reduced accordingly.
 
 In addition, when combined with the Cluster Autoscaler, if all nodes are heavily utilizing resources, new nodes are automatically provisioned to meet the demand. This seamless integration of KEDA with the Cluster Autoscaler ensures that UPLION can dynamically adjust its resources at both the pod and node levels, thereby meeting operational demands efficiently and effectively. This epitomizes true automatic scalability.
 
-## Natively Integrated with Kubernetes
+### Natively Integrated with Kubernetes
 
 UPLION utilizes Kubernetes to efficiently manage worker nodes through the development of a custom operator named "AI Model Operator." To deploy a model, users need only create an AI Model object with specific parameters, and the operator will automatically establish the necessary deployments and pods. Should scaling be required, the operator also manages the KEDA configuration seamlessly.
 
 Additionally, UPLION leverages Kubernetes' event system to implement a robust error-handling mechanism. In cases where irreversible errors occur within a worker node—such as configuration errors or invalid API keys—the node generates an event. The AI Model Operator captures this event and updates the status of the AI Model to 'Failed.' Once the configuration is corrected and reapplied, the status reverts to 'Running.' This integration streamlines the management of complex AI deployments and enhances system reliability and resilience, establishing UPLION as a truly Kubernetes-native solution.
 
-# Technology
+## Technology
 
-## Istio
+### Istio
 
 In the UPLION architecture, Istio is leveraged to enhance authentication and rate limiting capabilities. Its contributions to these areas are as follows:
 
 1. **Intercepting Requests for Middleware**: Istio intercepts requests before they reach the API node, extracts the API token from the request, and verifies its validity and quota. It also enforces rate limiting. This middleware mechanism clarifies the logic and simplifies both development and deployment processes.
 2. **Observability**: Istio provides comprehensive observability features, including detailed logs, metrics, and tracing capabilities. These tools are invaluable for monitoring the health and performance of services in real-time, allowing for quick identification and resolution of issues, thereby ensuring high availability and performance.
 
-## Programming Languages
+### Programming Languages
 
 The development of the main API service and the AI model operator utilizes Go. The main API service requires high concurrency, which Go handles efficiently. For the AI model operator, Go was chosen due to the convenience of the Operator SDK, which simplifies development considerably.
 
@@ -89,7 +89,7 @@ For the frontend and the admin dashboard, Next.js and React are employed. These 
 
 For components such as the worker node, where concurrency demands are lower, Python is used. Python offers simplicity and a vast ecosystem, making it ideal for tasks with less intensive concurrency requirements.
 
-## Terraform
+### Terraform
 
 Terraform is used as the primary configuration and deployment tool across the entire architecture. Terraform is an open-source infrastructure as code software tool that enables users to define and provision data center infrastructure using a high-level configuration language. It supports multiple service providers, including AWS, where it can manage resources ranging from Elastic Kubernetes Service (EKS) clusters to databases and message queues, as well as the deployment of various applications.
 
