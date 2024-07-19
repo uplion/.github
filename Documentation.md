@@ -72,6 +72,8 @@ UPLION utilizes Kubernetes to efficiently manage worker nodes through the develo
 
 Additionally, UPLION leverages Kubernetes' event system to implement a robust error-handling mechanism. In cases where irreversible errors occur within a worker node—such as configuration errors or invalid API keys—the node generates an event. The AI Model Operator captures this event and updates the status of the AI Model to 'Failed.' Once the configuration is corrected and reapplied, the status reverts to 'Running.' This integration streamlines the management of complex AI deployments and enhances system reliability and resilience, establishing UPLION as a truly Kubernetes-native solution.
 
+video: https://www.bilibili.com/video/BV1qz8xeTEJf
+
 ## Technology
 
 ### Istio
@@ -96,3 +98,6 @@ Terraform is used as the primary configuration and deployment tool across the en
 To deploy the entire application from scratch, one only needs to execute two commands: `terraform init` to initialize the setup and `terraform apply` to apply the configurations and launch the resources. This deployment process will be demonstrated in detail during the upcoming demo.
 
 Terraform significantly simplifies the deployment process, particularly in environments like the AWS Academy Learner Lab, where there is a frequent need to reset and redeploy resources.
+
+### Demonstration
+video: https://www.bilibili.com/video/BV1Zz8xeTETE
