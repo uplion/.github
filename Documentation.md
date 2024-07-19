@@ -48,6 +48,7 @@ This configuration forms the core architecture of UPLION. Additionally, several 
 
 1. **Authentication and Rate Limiting Services**: These services function as middleware, processing requests before they reach the API node. They verify the validity of the request token, check if rate limits are within acceptable bounds, and determine if quotas have been exhausted. This primarily involves reading from the database, with nearly all data cacheable via **Redis**.
 2. **Frontend**: Designed for usability, the frontend interface, similar to **ChatGPT**, enables users to interact seamlessly with the system.
+![frontend](image/Documentation/frontend.png)
 3. **Admin Dashboard**: Utilizing Kubernetes and the operator, this dashboard provides a user-friendly interface for managing worker nodes (or AI models), as well as users and tokens.
    ![admindashboard](image/Documentation/admindashboard.png)
    ![aidashboard](image/Documentation/aidashboard.png)
@@ -113,9 +114,6 @@ To deploy the entire application from scratch, one only needs to execute two com
 
 Terraform significantly simplifies the deployment process, particularly in environments like the AWS Academy Learner Lab, where there is a frequent need to reset and redeploy resources.
 
-### Frontend
-
-![frontend](image/Documentation/frontend.png)
 
 ### Demonstration
 
