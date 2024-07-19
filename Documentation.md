@@ -72,7 +72,7 @@ UPLION utilizes Kubernetes to efficiently manage worker nodes through the develo
 
 Additionally, UPLION leverages Kubernetes' event system to implement a robust error-handling mechanism. In cases where irreversible errors occur within a worker node—such as configuration errors or invalid API keys—the node generates an event. The AI Model Operator captures this event and updates the status of the AI Model to 'Failed.' Once the configuration is corrected and reapplied, the status reverts to 'Running.' This integration streamlines the management of complex AI deployments and enhances system reliability and resilience, establishing UPLION as a truly Kubernetes-native solution.
 
-video: [https://www.bilibili.com/video/BV1qz8xeTEJf]
+video: https://www.bilibili.com/video/BV1qz8xeTEJf
 
 ## Technology
 
@@ -100,4 +100,4 @@ To deploy the entire application from scratch, one only needs to execute two com
 Terraform significantly simplifies the deployment process, particularly in environments like the AWS Academy Learner Lab, where there is a frequent need to reset and redeploy resources.
 
 ### Demonstration
-video: [https://www.bilibili.com/video/BV1Zz8xeTETE]
+video: https://www.bilibili.com/video/BV1Zz8xeTETE
