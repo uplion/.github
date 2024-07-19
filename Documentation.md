@@ -49,6 +49,8 @@ This configuration forms the core architecture of UPLION. Additionally, several 
 1. **Authentication and Rate Limiting Services**: These services function as middleware, processing requests before they reach the API node. They verify the validity of the request token, check if rate limits are within acceptable bounds, and determine if quotas have been exhausted. This primarily involves reading from the database, with nearly all data cacheable via **Redis**.
 2. **Frontend**: Designed for usability, the frontend interface, similar to **ChatGPT**, enables users to interact seamlessly with the system.
 3. **Admin Dashboard**: Utilizing Kubernetes and the operator, this dashboard provides a user-friendly interface for managing worker nodes (or AI models), as well as users and tokens.
+   ![admindashboard](image/Documentation/admindashboard.png)
+   ![aidashboard](image/Documentation/aidashboard.png)
 4. **Account Services**: These services offer authentication for both the frontend and the management dashboard.
 5. **Billing Service**: Upon task completion by a worker node, statistical information is placed into a batch processing queue. The account and billing services aggregate this data and consolidate it into a single database write request, significantly reducing database load.
 
@@ -66,6 +68,8 @@ A key attribute of UPLION is its capability for automatic scalability. This is f
 
 In addition, when combined with the Cluster Autoscaler, if all nodes are heavily utilizing resources, new nodes are automatically provisioned to meet the demand. This seamless integration of KEDA with the Cluster Autoscaler ensures that UPLION can dynamically adjust its resources at both the pod and node levels, thereby meeting operational demands efficiently and effectively. This epitomizes true automatic scalability.
 
+![KEDA](image/Documentation/KEDA.png)
+
 ### Natively Integrated with Kubernetes
 
 UPLION utilizes Kubernetes to efficiently manage worker nodes through the development of a custom operator named "AI Model Operator." To deploy a model, users need only create an AI Model object with specific parameters, and the operator will automatically establish the necessary deployments and pods. Should scaling be required, the operator also manages the KEDA configuration seamlessly.
@@ -73,6 +77,16 @@ UPLION utilizes Kubernetes to efficiently manage worker nodes through the develo
 Additionally, UPLION leverages Kubernetes' event system to implement a robust error-handling mechanism. In cases where irreversible errors occur within a worker node—such as configuration errors or invalid API keys—the node generates an event. The AI Model Operator captures this event and updates the status of the AI Model to 'Failed.' Once the configuration is corrected and reapplied, the status reverts to 'Running.' This integration streamlines the management of complex AI deployments and enhances system reliability and resilience, establishing UPLION as a truly Kubernetes-native solution.
 
 video: https://www.bilibili.com/video/BV1qz8xeTEJf
+
+In managing worker nodes, UPLION leverages Kubernetes with a custom "AI Model Operator." To deploy a model, you create an AI Model object with your parameters, and the operator sets up the necessary deployments and pods automatically. It also handles KEDA configuration for scaling if needed.
+
+We use Kubernetes' event system for robust error handling. If a worker node encounters irreversible errors, it generates an event. The AI Model Operator captures this event and sets the AI Model status to 'Failed'. After correcting the configuration, the status resets to 'Running'. This integration simplifies complex AI deployments and enhances reliability, making UPLION a true Kubernetes-native solution.
+
+![ai-model](image/Documentation/ai-model.png)
+
+Including the aforementioned KEDA auto-scaling feature, it is integrated into this CRD and operator. By simply adding one line, msgBacklogThreshold, the number of replicas for this AI Model will be automatically controlled by KEDA, achieving automatic scaling based on the number of requests.
+
+![ai-model](image/Documentation/ai-model-2.png)
 
 ## Technology
 
@@ -99,5 +113,10 @@ To deploy the entire application from scratch, one only needs to execute two com
 
 Terraform significantly simplifies the deployment process, particularly in environments like the AWS Academy Learner Lab, where there is a frequent need to reset and redeploy resources.
 
+### Frontend
+
+![frontend](image/Documentation/frontend.png)
+
 ### Demonstration
+
 video: https://www.bilibili.com/video/BV1Zz8xeTETE
